@@ -1,0 +1,314 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
+// swift-module-flags: -target x86_64-apple-ios14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OneLoginSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Alamofire
+import Combine
+import Foundation
+@_exported import OneLoginSDK
+import RxSwift
+import Security
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+public enum OneLoginError : Swift.Error {
+  case wrongFormat
+  case incorrectCode
+  case noInternetConnection
+  case serverError
+  case parseTotpFailed
+  case keychainError
+  case clientIdNotFound
+  case clientSecretNotFound
+  case accessTokenExpired
+  public static func == (a: OneLoginSDK.OneLoginError, b: OneLoginSDK.OneLoginError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class TokenMFAUserManager {
+  @objc deinit
+}
+extension Swift.String {
+  public func isVersion(equalTo targetVersion: Swift.String) -> Swift.Bool
+  public func isVersion(greaterThan targetVersion: Swift.String) -> Swift.Bool
+  public func isVersion(greaterThanOrEqualTo targetVersion: Swift.String) -> Swift.Bool
+  public func isVersion(lessThan targetVersion: Swift.String) -> Swift.Bool
+  public func isVersion(lessThanOrEqualTo targetVersion: Swift.String) -> Swift.Bool
+  public func isValidAppVersion() -> Swift.Bool
+}
+public struct Constants {
+  public struct Parameters {
+  }
+}
+extension Foundation.Bundle {
+  public static let InternalBundleId: Swift.String
+  public var releaseVersionNumber: Swift.String {
+    get
+  }
+  public var buildVersionNumber: Swift.String {
+    get
+  }
+  public var versionAndBuild: Swift.String {
+    get
+  }
+  public var isInternal: Swift.Bool {
+    get
+  }
+}
+public enum MappingUserAttributes {
+  case asyncMapping
+  case syncMapping
+  case disabled
+  public static func == (a: OneLoginSDK.MappingUserAttributes, b: OneLoginSDK.MappingUserAttributes) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct AvailableFactorsModel : Swift.Codable {
+  public let factor_id: Swift.Int?
+  public let name: Swift.String?
+  public let auth_factor_name: Swift.String?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct EnrollFactorModel : Swift.Codable {
+  public let id: Swift.String?
+  public let status: Swift.String?
+  public let auth_factor_name: Swift.String?
+  public let type_display_name: Swift.String?
+  public let user_display_name: Swift.String?
+  public let factor_data: OneLoginSDK.EnrollFactorModel.Factor_data?
+  public init(from decoder: Swift.Decoder) throws
+  public struct Factor_data : Swift.Codable {
+    public let verification_token: Swift.String?
+    public let totp_url: Swift.String?
+    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: Swift.Encoder) throws
+  }
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct EnrolledFactorsModel : Swift.Codable {
+  public let device_id: Swift.String?
+  public let user_display_name: Swift.String?
+  public let type_display_name: Swift.String?
+  public let auth_factor_name: Swift.String?
+  public let isDefault: Swift.Bool?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct ActivateFactorsModel : Swift.Codable {
+  public let id: Swift.String?
+  public let device_id: Swift.String?
+  public let user_display_name: Swift.String?
+  public let type_display_name: Swift.String?
+  public let auth_factor_name: Swift.String?
+  public let user_id: Swift.String?
+  public let expires_at: Swift.String?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct VerifyFactorModel : Swift.Codable {
+  public let id: Swift.String?
+  public let status: Swift.String?
+  public let device_id: Swift.String?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct StatusForFactor : Swift.Codable {
+  public let status: OneLoginSDK.Status?
+  public let device_id: Swift.String?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct TempMFATokenModel : Swift.Codable {
+  public let mfa_token: Swift.String?
+  public let expires_at: Swift.String?
+  public let reusable: Swift.Bool?
+  public let device_id: Swift.String?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public enum SharedUtils {
+}
+public struct OneLoginSdkConfig {
+  public let credential: (clientId: Swift.String, secret: Swift.String)
+  public let subDomain: Swift.String
+  public init(credential: (clientId: Swift.String, secret: Swift.String), subDomain: Swift.String)
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class OneLoginSDK : ObjectiveC.NSObject {
+  public static let shared: OneLoginSDK.OneLoginSDK
+  public func intializeSdk(_ sdkConfig: OneLoginSDK.OneLoginSdkConfig)
+  public func genrateToken(completion: @escaping (_ success: Swift.Bool, _ tokenDetail: OneLoginSDK.GenerateTokenModel?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func revokeToken(completion: @escaping (_ success: Swift.Bool, _ status: OneLoginSDK.StatusForFactor?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func getUsersList(completion: @escaping (_ success: Swift.Bool, _ usersList: [OneLoginSDK.UserModel]?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func getUser(userId: Swift.String, completion: @escaping (_ success: Swift.Bool, _ userDetail: OneLoginSDK.UserModel?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func createUser(username: Swift.String, email: Swift.String, mappings: OneLoginSDK.MappingUserAttributes?, validatePolicy: Swift.Bool?, otherAttributes: [Swift.String : Any], completion: @escaping (_ success: Swift.Bool, _ userDetail: OneLoginSDK.UserCreationModal?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func updateUser(id: Swift.Int, mappings: OneLoginSDK.MappingUserAttributes?, validatePolicy: Swift.Bool?, updateAttributes: [Swift.String : Any], completion: @escaping (_ success: Swift.Bool, _ userDetail: OneLoginSDK.UserCreationModal?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func deleteUser(id: Swift.Int, completion: @escaping (_ success: Swift.Bool, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func getAvailableFactors(userId: Swift.String, completion: @escaping (_ success: Swift.Bool, _ availableFactors: [OneLoginSDK.AvailableFactorsModel]?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func enrollFactor(userId: Swift.String, factorId: Swift.Int, displayName: Swift.String, completion: @escaping (_ success: Swift.Bool, _ enrolledFactor: OneLoginSDK.EnrollFactorModel?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func activateFactor(userId: Swift.String, deviceId: Swift.String, expiresIn: Swift.Int?, redirectTo: Swift.String? = nil, customMessage: Swift.String? = nil, completion: @escaping (_ success: Swift.Bool, _ factorDetail: OneLoginSDK.ActivateFactorsModel?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func getEnrolledFactors(userId: Swift.String, completion: @escaping (_ success: Swift.Bool, _ enrolledFactors: [OneLoginSDK.EnrolledFactorsModel]?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func removeFactor(userId: Swift.String, deviceId: Swift.Int, completion: @escaping (_ success: Swift.Bool, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func verifyEnrollment(userId: Swift.String, registrationId: Swift.String, otp: Swift.String, completion: @escaping (_ success: Swift.Bool, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func verifyFactorOTP(userId: Swift.String, otp: Swift.String, deviceId: Swift.Int?, verificationId: Swift.String, completion: @escaping (_ success: Swift.Bool, _ verificationStatus: OneLoginSDK.VerifyFactorModel?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func getRateLimit(completion: @escaping (_ success: Swift.Bool, _ rateLimit: OneLoginSDK.RateLimit?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func isFactorVerified(userId: Swift.String, verificationId: Swift.String, completion: @escaping (_ success: Swift.Bool, _ statusFactor: OneLoginSDK.VerifyFactorModel?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func isEnrollmentOfFactorVerified(userId: Swift.String, registrationId: Swift.String, completion: @escaping (_ success: Swift.Bool, _ statusFactor: OneLoginSDK.VerifyFactorModel?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  public func getMFAToken(userId: Swift.String, expiresIn: Swift.Int, reusable: Swift.Bool, completion: @escaping (_ success: Swift.Bool, _ tempMFA: OneLoginSDK.TempMFATokenModel?, _ error: OneLoginSDK.ApiError?) -> Swift.Void)
+  @objc deinit
+}
+public struct UserCreationModal : Swift.Codable {
+  public let created_at: Swift.String?
+  public let id: Swift.Int?
+  public let state: Swift.Int?
+  public let department: Swift.String?
+  public let email: Swift.String?
+  public let last_login: Swift.String?
+  public let password_changed_at: Swift.String?
+  public let preferred_locale_code: Swift.String?
+  public let firstname: Swift.String?
+  public let status: Swift.Int?
+  public let userprincipalname: Swift.String?
+  public let title: Swift.String?
+  public let role_ids: [Swift.String]?
+  public let lastname: Swift.String?
+  public let updated_at: Swift.String?
+  public let member_of: Swift.String?
+  public let phone: Swift.String?
+  public let company: Swift.String?
+  public let username: Swift.String?
+  public let manager_ad_id: Swift.String?
+  public let activated_at: Swift.String?
+  public let samaccountname: Swift.String?
+  public let directory_id: Swift.String?
+  public let external_id: Swift.String?
+  public let group_id: Swift.String?
+  public let invalid_login_attempts: Swift.Int?
+  public let invitation_sent_at: Swift.String?
+  public let trusted_idp_id: Swift.String?
+  public let comment: Swift.String?
+  public let distinguished_name: Swift.String?
+  public let locked_until: Swift.String?
+  public let manager_user_id: Swift.String?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct HostInterceptor : Alamofire.RequestInterceptor {
+  public static var hostOverride: Combine.CurrentValueSubject<Swift.String?, Swift.Never>
+  public static var httpAgent: Swift.String?
+}
+public struct GenerateTokenModel : Swift.Codable {
+  public let access_token: Swift.String?
+  public let created_at: Swift.String?
+  public let expires_in: Swift.Int?
+  public let refresh_token: Swift.String?
+  public let token_type: Swift.String?
+  public let account_id: Swift.Int?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct Status : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct RateLimit : Swift.Codable {
+  public let status: OneLoginSDK.Status?
+  public let data: OneLoginSDK.RateLimit.DataRateLimit?
+  public init(from decoder: Swift.Decoder) throws
+  public struct DataRateLimit : Swift.Codable {
+    public let limit: Swift.Int?
+    public let remaining: Swift.Int?
+    public let reset: Swift.Int?
+    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: Swift.Encoder) throws
+  }
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class OneLoginApi {
+  public static let shadowHosts: [Swift.String]
+  @objc deinit
+}
+extension OneLoginSDK.OneLoginApi {
+  public static func generateToken(clientId: Swift.String, clientSecret: Swift.String) -> RxSwift.Observable<OneLoginSDK.GenerateTokenModel>
+  public static func getRateLimit(accessToken: Swift.String) -> RxSwift.Observable<OneLoginSDK.RateLimit>
+  public static func revokeToken(accessToken: Swift.String, clientId: Swift.String, clientSecret: Swift.String) -> RxSwift.Observable<OneLoginSDK.StatusForFactor>
+}
+extension OneLoginSDK.OneLoginApi {
+  public static func getUsersList(accessToken: Swift.String) -> RxSwift.Observable<[OneLoginSDK.UserModel]>
+  public static func getUserDetail(accessToken: Swift.String, userId: Swift.String) -> RxSwift.Observable<OneLoginSDK.UserModel>
+  public static func createUser(accessToken: Swift.String, userName: Swift.String, email: Swift.String, mappings: OneLoginSDK.MappingUserAttributes?, validatePolicy: Swift.Bool?, customAttributes: [Swift.String : Any]) -> RxSwift.Observable<OneLoginSDK.UserCreationModal>
+  public static func updateUser(accessToken: Swift.String, userId: Swift.Int, mappings: OneLoginSDK.MappingUserAttributes?, validatePolicy: Swift.Bool?, customAttributes: [Swift.String : Any]) -> RxSwift.Observable<OneLoginSDK.UserCreationModal>
+  public static func deleteUser(accessToken: Swift.String, userId: Swift.Int) -> RxSwift.Observable<Swift.Bool>
+}
+extension OneLoginSDK.OneLoginApi {
+  public static func getAvailableFactors(accessToken: Swift.String, userId: Swift.String) -> RxSwift.Observable<[OneLoginSDK.AvailableFactorsModel]>
+  public static func enrollFactor(accessToken: Swift.String, userId: Swift.String, factorId: Swift.Int, displayName: Swift.String) -> RxSwift.Observable<OneLoginSDK.EnrollFactorModel>
+  public static func verifyFactor(accessToken: Swift.String, userId: Swift.String) -> RxSwift.Observable<OneLoginSDK.UserModel>
+  public static func activateFactor(accessToken: Swift.String, userId: Swift.String, deviceId: Swift.String, expiresIn: Swift.Int?, redirectTo: Swift.String? = nil, customMessage: Swift.String? = nil) -> RxSwift.Observable<OneLoginSDK.ActivateFactorsModel>
+  public static func getEnrolledFactors(accessToken: Swift.String, userId: Swift.String) -> RxSwift.Observable<[OneLoginSDK.EnrolledFactorsModel]>
+  public static func removeFactor(accessToken: Swift.String, userId: Swift.String, deviceId: Swift.Int) -> RxSwift.Observable<Swift.Bool>
+  public static func verifyEnrollment(accessToken: Swift.String, userId: Swift.String, registrationId: Swift.String, otp: Swift.String) -> RxSwift.Observable<Swift.Bool>
+  public static func verifyFactorOTP(accessToken: Swift.String, userId: Swift.String, otp: Swift.String, deviceId: Swift.Int?, verificationId: Swift.String) -> RxSwift.Observable<OneLoginSDK.VerifyFactorModel>
+  public static func verifyFactorPush(accessToken: Swift.String, userId: Swift.String, verificationId: Swift.Int) -> RxSwift.Observable<[OneLoginSDK.VerifyFactorModel]>
+  public static func getFactorStatus(accessToken: Swift.String, userId: Swift.String, verificationId: Swift.String) -> RxSwift.Observable<OneLoginSDK.VerifyFactorModel>
+  public static func getFactorEnrollementStatus(accessToken: Swift.String, userId: Swift.String, registrationId: Swift.String) -> RxSwift.Observable<OneLoginSDK.VerifyFactorModel>
+  public static func generateTempMFA(accessToken: Swift.String, userID: Swift.String, expiresIn: Swift.Int, reusable: Swift.Bool) -> RxSwift.Observable<OneLoginSDK.TempMFATokenModel>
+}
+public struct UserModel : Swift.Codable {
+  public let invitation_sent_at: Swift.String?
+  public let lastname: Swift.String?
+  public let status: Swift.Int?
+  public let updated_at: Swift.String?
+  public let password_changed_at: Swift.String?
+  public let created_at: Swift.String?
+  public let firstname: Swift.String?
+  public let id: Swift.Int?
+  public let username: Swift.String?
+  public let locked_until: Swift.String?
+  public let external_id: Swift.String?
+  public let samaccountname: Swift.String?
+  public let distinguished_name: Swift.String?
+  public let email: Swift.String?
+  public let last_login: Swift.String?
+  public let member_of: Swift.String?
+  public let group_id: Swift.String?
+  public let state: Swift.Int?
+  public let activated_at: Swift.String?
+  public let invalid_login_attempts: Swift.Int?
+  public let directory_id: Swift.String?
+  public let phone: Swift.String?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public enum ApiError : Swift.Error {
+  case urlError(Foundation.URLError.Code)
+  case forbidden
+  case notFound
+  case conflict
+  case internalServerError
+  case other(code: Swift.Int)
+  case genericMessage(statusCode: Swift.Int, message: Swift.String?)
+  case accessTokenExpired
+  case clientIdNotFound
+  case clientSecretNotFound
+  public var statusCode: Swift.Int? {
+    get
+  }
+  public var message: Swift.String {
+    get
+  }
+}
+extension OneLoginSDK.ApiError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension OneLoginSDK.OneLoginError : Swift.Equatable {}
+extension OneLoginSDK.OneLoginError : Swift.Hashable {}
+extension OneLoginSDK.MappingUserAttributes : Swift.Equatable {}
+extension OneLoginSDK.MappingUserAttributes : Swift.Hashable {}

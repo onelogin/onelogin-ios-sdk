@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
   spec.author       = { "neelesh" => "Neelesh.Aggarwal@oneidentity.com" }
   spec.platform     = :ios, "14.0"
   spec.source       = { :git => "https://github.com/onelogin/onelogin-ios-sdk.git", :tag => spec.version.to_s }
-  spec.vendored_frameworks  = "MFAiOS/OneLoginSDK.xcframework"
+  spec.vendored_frameworks  = "OneLoginSDK/OneLoginSDK.xcframework"
 
   spec.dependency 'Alamofire', '5.4.1'
   spec.dependency 'RxSwift', '~> 5.0'
