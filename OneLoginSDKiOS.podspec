@@ -1,10 +1,10 @@
 
 Pod::Spec.new do |spec|
 
-  spec.name         = "OneLoginSDK-iOS"
-  spec.version      = "0.0.3"
-  spec.summary      = "OneLoginSDK-iOS empowers developers to create dynamic, engaging, and secure experiences."
-  spec.description  = 'OneLoginSDK-iOS is a robust and flexible solution designed to help developers effortlessly integrate Multi Factor authentication into their applications. It simplifies the process, ensuring timely and effective communication with your users.'
+  spec.name         = "OneLoginSDKiOS"
+  spec.version      = "0.0.4"
+  spec.summary      = "OneLoginSDKiOS empowers developers to create dynamic, engaging, and secure experiences."
+  spec.description  = 'OneLoginSDKiOS is a robust and flexible solution designed to help developers effortlessly integrate Multi Factor authentication into their applications. It simplifies the process, ensuring timely and effective communication with your users.'
   spec.homepage     = "https://developers.onelogin.com/api-docs/2/getting-started/dev-overview"
   spec.license      = 'MIT'
   spec.author       = { "Will Munslow" => "will.munslow@oneidentity.com" }
