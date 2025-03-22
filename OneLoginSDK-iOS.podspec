@@ -1,13 +1,13 @@
 
 Pod::Spec.new do |spec|
 
-  spec.name         = "OneLoginSDK"
+  spec.name         = "OneLoginSDK-iOS"
   spec.version      = "0.0.2"
-  spec.summary      = "OneLoginSDK empowers developers to create dynamic, engaging, and secure experiences."
-  spec.description  = 'OneLoginSDK is a robust and flexible solution designed to help developers effortlessly integrate Multi Factor authentication into their applications. It simplifies the process, ensuring timely and effective communication with your users.'
+  spec.summary      = "OneLoginSDK-iOS empowers developers to create dynamic, engaging, and secure experiences."
+  spec.description  = 'OneLoginSDK-iOS is a robust and flexible solution designed to help developers effortlessly integrate Multi Factor authentication into their applications. It simplifies the process, ensuring timely and effective communication with your users.'
   spec.homepage     = "https://developers.onelogin.com/api-docs/2/getting-started/dev-overview"
   spec.license      = 'MIT'
-  spec.author       = { "neelesh" => "Neelesh.Aggarwal@oneidentity.com" }
+  spec.author       = { "Will Munslow" => "will.munslow@oneidentity.com" }
   spec.platform     = :ios, "14.0"
   spec.source       = { :git => "https://github.com/onelogin/onelogin-ios-sdk.git", :tag => spec.version.to_s }
   spec.vendored_frameworks  = "OneLoginSDK/OneLoginSDK.xcframework"
