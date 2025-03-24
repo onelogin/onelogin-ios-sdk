@@ -1,0 +1,11 @@
+framework module OneLoginSDKiOS {
+  umbrella header "OneLoginSDKiOS.h"
+
+  export *
+  module * { export * }
+}
+
+module OneLoginSDKiOS.Swift {
+  header "OneLoginSDKiOS-Swift.h"
+  requires objc
+}
