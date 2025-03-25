@@ -16,6 +16,26 @@
    ```
 2. Run `pod install` to install the dependency.
 
+Or 
+
+#### Using CocoaPods with Onelogin source
+
+1. Add the following to the top of your `Podfile` to specify the source:
+
+   ```ruby
+   source 'https://github.com/CocoaPods/Specs.git'
+   source 'https://github.com/onelogin/onelogin-ios-sdk.git'
+   ```
+
+2. Then, add the OneLogin SDK to your `Podfile`:
+
+   ```ruby
+   pod 'OneLoginSDKiOS', '~> 0.0.5'
+   ```
+
+3. Run `pod install` to install the dependency.
+
+
 ### Configure the SDK
 
 To initialize the SDK, provide your client credentials and subdomain:
