@@ -38,6 +38,10 @@ Or
 
 ### Configure the SDK
 
+Onelogin SDK needs the Client ID, Secret and Domain of the OneLogin portal to
+communicate with OneLoginSDK. You can find these details in the settings 
+page of your OneLogin portal. 
+
 To initialize the SDK, provide your client credentials and subdomain:
 
 ```swift
@@ -82,5 +86,24 @@ The SDK provides many more endpoints to support your Multi-Factor Authentication
 - Users related methods available you can create/update/delete. While getting single user detail or list is also supported
 - Factors related methods available. Enroll, Verify , Activate, Temp MFA and many more operation can be perfomed on factor(s).
 
+
+
+---
+
+## Support Policy
+
+This policy defines the extent of support for Xcode, Swift, and platform version (iOS) in the **OneLoginSDKiOS**.
+
+### Xcode
+The only supported versions of Xcode are those that are currently required to submit apps to the App Store. Once a version of Xcode becomes unsupported, removing support for it in the SDK will not be considered a breaking change and will be handled in a minor release.
+
+### Swift
+The minimum supported Swift minor version will correspond to the one released with the oldest-supported version of Xcode. Once a specific Swift minor version becomes unsupported, removing support for it in the SDK will not be considered a breaking change and will be handled in a minor release.
+
+### Platforms
+Once a platform version becomes unsupported, removing support for it in the SDK will not be considered a breaking change and will be handled in a minor release.
+
+For example:
+- iOS 14 will no longer be supported once iOS 18 is released, and support for iOS 14 will be dropped in a minor release.
 
 ---
