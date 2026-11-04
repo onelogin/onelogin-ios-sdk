@@ -1,0 +1,27 @@
+name: SwiftPM
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test on an iOS simulator
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          schemes=$(xcodebuild -list -json | jq -r '(.workspace // .project).schemes[]')
+          echo "Schemes: $schemes"
+          scheme=OneLoginSDKiOS
+          if grep -qx 'OneLoginSDKiOS-Package' <<<"$schemes"; then scheme=OneLoginSDKiOS-Package; fi
+          udid=$(xcrun simctl list devices available -j \
+            | jq -r '[.devices | to_entries[] | select(.key | contains("iOS")) | .value[] | select(.name | startswith("iPhone"))][0].udid')
+          xcodebuild test -scheme "$scheme" -destination "id=$udid"
