@@ -3,37 +3,40 @@
 ## Getting Started
 
 ### Requirements
-- iOS 14.0+ / macOS 11.0+
-- Xcode 14.x
-- Swift 5.0+
+- iOS 16.2+
+- Xcode 14.2+ (Swift 5.7.2+)
 
 ### Installation
 
-#### Using CocoaPods
+#### Swift Package Manager
+
+In Xcode, choose **File > Add Package Dependencies…**, enter `https://github.com/onelogin/onelogin-ios-sdk.git`, and add the `OneLoginSDKiOS` library to your app target.
+
+In a `Package.swift`:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/onelogin/onelogin-ios-sdk.git", from: "1.0.1"),
+],
+targets: [
+    .target(
+        name: "YourApp",
+        dependencies: [.product(name: "OneLoginSDKiOS", package: "onelogin-ios-sdk")]
+    ),
+]
+```
+
+The package brings in Alamofire and RxSwift 5.1.3, which the SDK's API uses.
+
+#### CocoaPods
+
+CocoaPods Trunk becomes read-only on December 2, 2026, so new releases will be published through Swift Package Manager only. Version 1.0.0 remains available:
+
 1. Add the following line to your `Podfile`:
    ```ruby
-   pod 'OneLoginSDKiOS', '~> 0.0.5'
+   pod 'OneLoginSDKiOS', '~> 1.0'
    ```
 2. Run `pod install` to install the dependency.
-
-Or 
-
-#### Using CocoaPods with Onelogin source
-
-1. Add the following to the top of your `Podfile` to specify the source:
-
-   ```ruby
-   source 'https://github.com/CocoaPods/Specs.git'
-   source 'https://github.com/onelogin/onelogin-ios-sdk.git'
-   ```
-
-2. Then, add the OneLogin SDK to your `Podfile`:
-
-   ```ruby
-   pod 'OneLoginSDKiOS', '~> 0.0.5'
-   ```
-
-3. Run `pod install` to install the dependency.
 
 
 ### Configure the SDK
@@ -46,7 +49,7 @@ To initialize the SDK, provide your client credentials and subdomain:
 
 ```swift
 let config = OneLoginSdkConfig(credential: ("<CLIENT_ID>", "<CLIENT_SECRET>"), subDomain: "<Domain>")
-OneLoginSDK.shared.initializeSdk(config)
+OneLoginSDK.shared.intializeSdk(config)
 ```
 
 ### Generate Token
@@ -54,7 +57,7 @@ OneLoginSDK.shared.initializeSdk(config)
 To generate a token, use the following code:
 
 ```swift
-OneLoginSDK.shared.generateToken { [weak self] success, tokenDetail, error in
+OneLoginSDK.shared.genrateToken { [weak self] success, tokenDetail, error in
     // Handle success or error
 }
 ```
@@ -89,7 +92,7 @@ The SDK provides many more endpoints to support your Multi-Factor Authentication
 
 ### Example App 
 
-[OneLoginSDK's Example App] (https://github.com/onelogin/onelogin-ios-sdk-example.git)
+[OneLoginSDK's Example App](https://github.com/onelogin/onelogin-ios-sdk-example)
 
 ---
 
